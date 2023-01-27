@@ -1,0 +1,102 @@
+<mat-card>
+  <mat-card-content>
+    <table mat-table [dataSource]="peopleCheckin" class="w-100">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Tên</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.person?.christianName + " " + element.person?.firstName + " " + element.person?.lastName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef>Ghi chú</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.note }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="d-flex p-1 justify-content-end">
+            <div
+              class="status-span"
+              [ngClass]="{
+                'bg-mat-primary': element.status == CHECKIN_STATUS.PRESENT,
+                'bg-mat-accent': element.status == CHECKIN_STATUS.ABSENT_PERMITTED,
+                'bg-mat-warn': element.status == CHECKIN_STATUS.ABSENT
+              }"
+            >
+              {{ getCheckinStatus(element.status) }}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="birth">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.person?.birth | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="d-flex justify-content-end">
+            <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+              <mat-icon>check</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <div mat-menu-item class="p-1">
+                <button class="w-100" mat-raised-button color="primary" (click)="setCheckinStatus(element.personId, CHECKIN_STATUS.PRESENT)">Có mặt</button>
+              </div>
+              <div mat-menu-item class="p-1">
+                <button class="w-100" mat-raised-button color="warn" (click)="setCheckinStatus(element.personId, CHECKIN_STATUS.ABSENT)">Vắng</button>
+              </div>
+              <div mat-menu-item class="p-1">
+                <button class="w-100" mat-raised-button color="accent" (click)="setCheckinStatus(element.personId, CHECKIN_STATUS.ABSENT_PERMITTED)">
+                  Phép
+                </button>
+              </div>
+              <div mat-menu-item class="p-1"><button class="w-100" mat-raised-button>Ghi chú</button></div>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+<mat-card class="d-flex m-1 justify-content-center">
+  <mat-card-content class="w-100">
+    <div class="d-flex justify-content-center">
+      <img src="https://roilenergy.com/img/icons/avatar.jpg" alt="mock_avatar" class="avatar" />
+    </div>
+    <br />
+    <div class="row">
+      <div class="col text-end border-end">Tên Thánh, Họ và Tên</div>
+      <div class="col text-start text-bold">Giuse Nguyen Van A</div>
+    </div>
+    <div class="row">
+      <div class="col text-end border-end">Ngày sinh</div>
+      <div class="col text-start text-bold">01/01/1999</div>
+    </div>
+    <div class="row">
+      <div class="col text-end border-end">Số điện thoại</div>
+      <div class="col text-start text-bold">012345678</div>
+    </div>
+    <div class="row">
+      <div class="col text-end border-end">Địa chỉ</div>
+      <div class="col text-start text-bold">Đường X, huyện Y, tỉnh Z</div>
+    </div>
+    <div class="d-flex"></div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="d-flex m-1 justify-content-end">
+  <mat-card-content class="w-100 d-flex justify-content-end">
+    <button class="mx-1" mat-raised-button>Ghi chú</button>
+    <button class="mx-1" mat-raised-button color="accent">Phép</button>
+    <button class="mx-1" mat-raised-button color="warn">Vắng</button>
+    <button class="mx-1" mat-raised-button color="primary">Có mặt</button>
+  </mat-card-content>
+</mat-card>

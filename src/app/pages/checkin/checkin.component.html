@@ -1,0 +1,44 @@
+<mat-card class="mat-elevation-z8 p-2">
+  <mat-card-content>
+    <div class="d-flex row">
+      <div class="col-4">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Tên Thánh, Họ và Tên</th>
+              <th>Ngày sinh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of people">
+              <td>
+                {{ p.christianName + " " + p.firstName + " " + p.lastName }}
+              </td>
+              <td>
+                {{ p.birth | date : "dd/MM/yyyy" }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-8" style="max-width: inherit; overflow-x: auto">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let d of days">
+                {{ d.toString() | date : "dd/MM" }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of people">
+              <td *ngFor="let d of days">
+                <span style="opacity: 0;">check</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

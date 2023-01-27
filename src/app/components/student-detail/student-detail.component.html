@@ -1,0 +1,210 @@
+<mat-tab-group class="w-50 d-flex justify-content-center mx-auto">
+  <mat-tab label="Thông tin">
+    <div class="d-flex justify-content-center">
+      <mat-card class="m-2 w-100">
+        <mat-card-content>
+          <div class="d-flex justify-content-center">
+            <img
+              src="https://roilenergy.com/img/icons/avatar.jpg"
+              alt="mock_avatar"
+              class="avatar"
+            />
+          </div>
+          <br />
+          <div class="row">
+            <div class="col text-end border-end">Tên Thánh, Họ và Tên</div>
+            <div class="col text-start text-bold">Giuse Nguyen Van A</div>
+          </div>
+          <div class="row">
+            <div class="col text-end border-end">Ngày sinh</div>
+            <div class="col text-start text-bold">01/01/1999</div>
+          </div>
+          <div class="row">
+            <div class="col text-end border-end">Số điện thoại</div>
+            <div class="col text-start text-bold">012345678</div>
+          </div>
+          <div class="row">
+            <div class="col text-end border-end">Email</div>
+            <div class="col text-start text-bold">012345678@email.com</div>
+          </div>
+          <div class="row">
+            <div class="col text-end border-end">Địa chỉ</div>
+            <div class="col text-start text-bold">Đường X, huyện Y, tỉnh Z</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="d-flex justify-content-center">
+      <mat-card class="m-2 w-100">
+        <mat-card-content>
+          <h6 class="text-center">Những người liên quan</h6>
+          <br />
+          <table mat-table [dataSource]="relatedPeople" style="width: 100%">
+            <ng-container matColumnDef="christianName">
+              <th mat-header-cell *matHeaderCellDef>Tên Thánh</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.christianName }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef>Họ</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.firstName }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef>Tên</th>
+              <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="birth">
+              <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.birth | date : "dd/MM/yyyy" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.role }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex justify-content-end">
+                  <button mat-raised-button>Chi tiết</button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns"
+              class="d-none"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="d-flex justify-content-center">
+      <mat-card class="m-2 w-100">
+        <h6 class="text-center">Những nhóm liên quan</h6>
+        <br />
+        <mat-card-content>
+          <table mat-table [dataSource]="relatedGroup" style="width: 100%">
+            <ng-container matColumnDef="groupName">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="something">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">something</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex justify-content-end">
+                  <button mat-raised-button>Chi tiết</button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="groupDisplayedColumns"
+              class="d-none"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: groupDisplayedColumns"
+            ></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Các thay đổi">
+    <mat-card class="d-none">
+      <mat-card-content>
+        <h6 class="text-center">Không có chỉnh sửa</h6>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <div class="d-flex justify-content-between">
+          <div class="changeTime text-bold">hh:mm:ss dd/MM/yyyy</div>
+          <div class="changeBy">User A</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-between">
+          <div class="old">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="oldValue">old name</span>
+          </div>
+          <mat-icon>arrow_right_alt</mat-icon>
+          <div class="new">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="newValue">new name</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <br />
+    <mat-card>
+      <mat-card-content>
+        <div class="d-flex justify-content-between">
+          <div class="changeTime text-bold">hh:mm:ss dd/MM/yyyy</div>
+          <div class="changeBy">User A</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-between">
+          <div class="old">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="oldValue">old name</span>
+          </div>
+          <mat-icon>arrow_right_alt</mat-icon>
+          <div class="new">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="newValue">new name</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <br />
+    <mat-card>
+      <mat-card-content>
+        <div class="d-flex justify-content-between">
+          <div class="changeTime text-bold">hh:mm:ss dd/MM/yyyy</div>
+          <div class="changeBy">User A</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-between">
+          <div class="old">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="oldValue">old name</span>
+          </div>
+          <mat-icon>arrow_right_alt</mat-icon>
+          <div class="new">
+            <span class="key">Name</span>
+            <span>: </span>
+            <span class="newValue">new name</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

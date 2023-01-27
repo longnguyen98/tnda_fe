@@ -1,0 +1,14 @@
+.avatar {
+  width: auto;
+  height: 15em;
+  border-radius: 50%;
+}
+.text-bold {
+  font-weight: bold;
+}
+.row {
+  margin-bottom: 1em;
+}
+h6 {
+  font-weight: bold;
+}
